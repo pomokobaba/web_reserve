@@ -44,3 +44,19 @@ services:
     volumes:
       - ./phpmyadmin/sessions:/sessions
     container_name: ${PMA_CONTAINER}
+
+  nuxt:
+    build: ./docker/nuxt
+    ports:
+      - "3000:3000"
+    working_dir: "/src"
+    volumes:
+      - "./src:/src"
+      - node_modules_volume:/src/node_modules
+    tty: true
+    environment:
+    - HOST=0.0.0.0
+    - CHOKIDAR_USEPOLLING=true
+
+volumes:
+  node_modules_volume:

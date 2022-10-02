@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            UsersTableSeeder::class, // User追加のseederを呼び出すように追加
+            TweetsSeeder::class,
         ]);
     }
 }
