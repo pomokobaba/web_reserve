@@ -18,4 +18,6 @@ Route::get('/', function () {
 });
 
 // Route::get('/tweet', IndexController::class);
-Route::get('/tweet', App\Http\Controllers\Tweet\IndexController::class);
+Route::get('/tweet', \App\Http\Controllers\Tweet\IndexController::class)->name('tweet.index');
+// POSTメソッドでリクエストされた際、CreateControllerが呼ばれる
+Route::post('/tweet/create', \App\Http\Controllers\Tweet\CreateController::class)->name('tweet.create');
