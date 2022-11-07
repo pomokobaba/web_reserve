@@ -1,2 +1,4 @@
 .env
 phpmyadmin/sessions/
+/public/css
+/public/js

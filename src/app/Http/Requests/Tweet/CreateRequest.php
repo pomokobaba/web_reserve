@@ -30,6 +30,11 @@ class CreateRequest extends FormRequest
         ];
     }
 
+    public function userId(): int
+    {
+        return $this->user()->id;
+    }
+
     /**
      * 投稿されたデータの取得
      * 引数１に取得する名前、引数２に取得できない場合の初期値
