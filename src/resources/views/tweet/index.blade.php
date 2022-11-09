@@ -33,14 +33,18 @@
             <summary>
                 {{ $tweet->content }} by {{ $tweet->user->name }}
             </summary>
-            <div>
-                <a href="{{ route('tweet.update.index', $tweet->id) }}">編集</a>
-                <form action="{{ route('tweet.delete', $tweet->id) }}" method="post">
-                    @method('DELETE')
-                    @csrf
-                    <button type="submit">削除</button>
-                </form>
-            </div>
+            @if(Illuminate\Support\Facades\Auth::id() === $tweet->user_id)
+                <div>
+                    <a href="{{ route('tweet.update.index', $tweet->id) }}">編集</a>
+                    <form action="{{ route('tweet.delete', $tweet->id) }}" method="post">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit">削除</button>
+                    </form>
+                </div>   
+            @else
+                編集できません 
+            @endif
         </details>
     @endforeach
     </div>
