@@ -30,6 +30,10 @@ class CreateRequest extends FormRequest
         ];
     }
 
+    /**
+     * 今ログインしているユーザーの取得
+     *
+     */
     public function userId(): int
     {
         return $this->user()->id;
