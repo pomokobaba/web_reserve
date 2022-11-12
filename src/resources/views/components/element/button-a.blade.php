@@ -4,6 +4,7 @@
 ])
 @php
     if(!function_exists('getThemeClassForButtonA')){
+        // ボタンのデザインの指定
         function getThemeClassForButtonA($theme){
             return match ($theme) {
                 'primary' => 'text-white bg-blue-500 hover:bg-blue-600 focus:ring-blue-500',
@@ -15,9 +16,9 @@
 @endphp
 <div class="px-4">
     <a 
-    href="{{ $href }}"
-    class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2
-    {{ getThemeClassForButtonA($theme) }}">
-    {{ $slot }}
+     href="{{ $href }}"
+     class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 {{ getThemeClassForButtonA($theme) }}"
+    >
+        {{ $slot }}
     </a>
 </div>

@@ -20,7 +20,7 @@ class PutController extends Controller
     public function __invoke(UpdateRequest $request, TweetService $tweetService)
     {
         // 自分のツイートかチェック
-        if(!$tweetService->checkOwnTweet($request->user()->id, $tweetId))
+        if(!$tweetService->checkOwnTweet($request->user()->id, $request->id()))
         {
             // 他人の投稿したツイートにアクセスすると403エラー
             throw new AccessDeniedHttpException();
@@ -34,7 +34,7 @@ class PutController extends Controller
         $tweet->save();
         
         return redirect()
-            ->route('tweet.update.index', $tweet->id)
+            ->route('tweet.update.index', ['tweetId' => $tweet->id])
             ->with('feedback.success', "つぶやきを編集しました");
     }
 }

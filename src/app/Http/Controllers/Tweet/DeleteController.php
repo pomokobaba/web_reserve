@@ -18,15 +18,13 @@ class DeleteController extends Controller
      */
     public function __invoke(Request $request, TweetService $tweetService)
     {
+        $tweetId = (int) $request->route('tweetId');
         // 自分のツイートかチェック
-        if(!$tweetService->checkOwnTweet($request->user()->id, $tweetId))
+        if (!$tweetService->checkOwnTweet($request->user()->id, $tweetId))
         {
             // 他人の投稿したツイートにアクセスすると403エラー
             throw new AccessDeniedHttpException();
         }
-
-        // パラメーターからtweetIdを取得
-        $tweetId = (int) $request->route('tweetId');
         // tweetIdを元にtweetsテーブルから、削除したい列を取得
         $tweet = Tweet::where('id', $tweetId)->firstOrFail();
         // 列の削除

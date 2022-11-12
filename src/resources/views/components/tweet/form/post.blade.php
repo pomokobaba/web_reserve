@@ -14,7 +14,7 @@
         </p> 
         
         @error('tweet')
-        <x-alert.error>{{ $message }}</x-alert.error>            
+            <x-alert.error>{{ $message }}</x-alert.error>            
         @enderror
 
         <div class="flex flex-wrap justify-end">
