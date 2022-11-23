@@ -59,6 +59,7 @@ class RegisteredUserController extends Controller
         $allUser = User::get();
         foreach ($allUser as $user) {
             $mailer-> to($user->email)
+                // ->send(new DailyTweetCount($user, $newUser));
                 ->send(new NewUserIntroduction($user, $newUser));
         } 
 
