@@ -26,7 +26,9 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'tweet' => 'required|max:140' //必須か最大値140文字
+            'tweet' => 'required|max:140',  //必須か最大値140文字
+            'images' => 'array|max:4',      //
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048' 
         ];
     }
 
@@ -49,5 +51,15 @@ class CreateRequest extends FormRequest
     public function tweet(): string
     {
         return $this->input('tweet');
+    }
+
+    /**
+     * 画像の取得
+     *
+     * @return array
+     */
+    public function images(): array
+    {
+        return $this->file('images', []);
     }
 }

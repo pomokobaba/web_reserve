@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Tweet;
 use App\Http\Controllers\Controller; 
 use App\Http\Requests\Tweet\CreateRequest;
 use App\Models\Tweet;
-// use Illuminate\Http\Request;
+use App\Services\TweetService;
 
 class CreateController extends Controller
 {
@@ -16,14 +16,15 @@ class CreateController extends Controller
      * @return \Illuminate\Http\Response
      */
     // FromRequestクラスをコントローラーで利用するため、引数に指定
-    public function __invoke(CreateRequest $request)
+    public function __invoke(CreateRequest $request, TweetService $tweetService)
     {
-        $tweet = new Tweet;
-        // user_idの保存
-        $tweet->user_id = $request->userID();
-        $tweet->content = $request->tweet();
-        // DBに値をセット
-        $tweet->save();
+        // つぶやきと画像の保存
+        $tweetService->saveTweet(
+            $request->userID(),
+            $request->tweet(),
+            $request->images()
+        );
+
         // 元の画面に戻す。
         return redirect()->route('tweet.index');
     }
