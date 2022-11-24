@@ -25,10 +25,8 @@ class DeleteController extends Controller
             // 他人の投稿したツイートにアクセスすると403エラー
             throw new AccessDeniedHttpException();
         }
-        // tweetIdを元にtweetsテーブルから、削除したい列を取得
-        $tweet = Tweet::where('id', $tweetId)->firstOrFail();
-        // 列の削除
-        $tweet->delete();
+        // つぶやきと画像の削除
+        $tweetService->deleteTweet($tweetId);
 
         return redirect()
             ->route('tweet.index')
