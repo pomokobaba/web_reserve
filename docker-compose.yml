@@ -30,6 +30,19 @@ services:
         MYSQL_PASSWORD: ${DB_PASS}
     container_name: ${MYSQL_CONTAINER}
 
+  mysql.test:
+    image: mysql:8.0
+    environment:
+        MYSQL_DATABASE: ${DB_NAME}
+        MYSQL_USER: ${DB_USER}
+        MYSQL_ROOT_PASSWORD: ${DB_PASS}
+        MYSQL_PASSWORD: ${DB_PASS}
+        MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    healthcheck:
+        test: [ "CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}" ]
+        retries: 3
+        timeout: 5s
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
